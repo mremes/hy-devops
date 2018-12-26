@@ -1,0 +1,4 @@
+docker run -i -d --name website ubuntu:latest sh -c 'apt-get update; apt-get install -f -y curl; read website; sleep 3; curl http://$website;'
+docker attach <container_id>
+# input helsinki.fi
+# done
