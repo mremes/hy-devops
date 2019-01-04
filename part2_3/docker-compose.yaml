@@ -1,0 +1,40 @@
+version: '3.5'
+
+services:
+     redis:
+        image: redis
+        container_name: cache
+     postgres:
+        image: postgres
+        container_name: database
+        environment:
+            - POSTGRES_USER=backend
+            - POSTGRES_PASSWORD=backend
+     backend:
+        image: backend
+        ports:
+            - 8000:8000
+        volumes:
+            - ../backend-example-docker/logs.txt:/webapp/logs.txt
+        container_name: backend
+        environment:
+            - FRONT_URL=http://localhost:5000
+            - REDIS=redis
+            - DB_USERNAME=backend
+            - DB_PASSWORD=backend
+            - DB_NAME=backend
+            - DB_HOST=database
+        depends_on:
+            - redis
+            - postgres
+        links:
+            - redis
+            - postgres:database
+     frontend:
+        image: frontend
+        ports:
+            - 5000:5000
+        container_name: frontend
+        environment:
+            - API_URL=http://localhost:8000
+

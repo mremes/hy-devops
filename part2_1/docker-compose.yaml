@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+    backend:
+        image: backend
+        ports:
+            - 8000:8000
+        volumes:
+            - ../backend-example-docker/logs.txt:/webapp/logs.txt
+        container_name: backend
+        environment:
+            - FRONT_URL=http://localhost:5000
+    frontend:
+        image: frontend
+        ports:
+            - 5000:5000
+        container_name: frontend
+        environment:
+            - API_URL=http://localhost:8000
