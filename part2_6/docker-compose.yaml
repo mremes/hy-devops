@@ -1,0 +1,66 @@
+version: '3.5'
+
+services:
+     nginx:
+        image: nginx
+        container_name: nginx
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+        ports:
+            - 80:80
+        networks:
+            - app_network
+        depends_on:
+            - backend
+            - frontend
+     redis:
+        image: redis
+        container_name: redis
+        networks:
+            - db_network
+        volumes:
+            - ./redisdata:/data
+     postgres:
+        image: postgres
+        container_name: postgres
+        environment:
+            - POSTGRES_USER=backend
+            - POSTGRES_PASSWORD=backend
+        volumes:
+            - ./psqldata:/var/lib/postgresql/data
+        networks:
+            - db_network
+     backend:
+        image: backend
+        ports:
+            - 8000:8000
+        volumes:
+            - ../backend-example-docker/logs.txt:/webapp/logs.txt
+        container_name: backend
+        environment:
+            - FRONT_URL=http://frontend:5000
+            - REDIS=redis
+            - DB_USERNAME=backend
+            - DB_PASSWORD=backend
+            - DB_NAME=backend
+            - DB_HOST=postgres
+        depends_on:
+            - redis
+            - postgres
+        networks:
+            - app_network
+            - db_network
+     frontend:
+        image: frontend
+        ports:
+            - 5000:5000
+        container_name: frontend
+        environment:
+            - API_URL=/api
+        networks:
+            - app_network
+networks:
+    app_network:
+        name: app_network
+    db_network:
+        name: db_network
