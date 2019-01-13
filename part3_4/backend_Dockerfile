@@ -1,0 +1,17 @@
+FROM node:alpine
+
+ENV FRONT_URL=http://localhost:5000
+
+WORKDIR /webapp
+
+COPY package.json .
+RUN npm install
+
+COPY config.js index.js logs.txt ./
+COPY server ./server
+
+EXPOSE 8000
+
+RUN chown -R node: /webapp
+USER node
+CMD ["npm", "start"]

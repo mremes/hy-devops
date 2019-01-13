@@ -1,0 +1,17 @@
+FROM node:alpine
+
+ENV API_URL=http://127.0.0.1:8000
+
+WORKDIR /webapp
+
+COPY package.json .
+RUN npm install
+COPY config.js webpack.config.js ./
+COPY src ./src
+COPY util ./util
+
+EXPOSE 5000
+
+RUN chown -R node: /webapp
+USER node
+CMD ["npm", "start"]

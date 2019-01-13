@@ -1,0 +1,20 @@
+FROM ubuntu:16.04
+
+WORKDIR /webapp
+
+RUN apt update && apt install -f -y curl && \
+    curl -sL https://deb.nodesource.com/setup_10.x | bash && \
+    apt install -y nodejs && \
+    node -v && npm -v && \
+    apt-get purge -y --auto-remove curl && \
+    rm -rf /var/lib/apt/lists/*
+    
+
+COPY package.json config.js index.js ./
+RUN npm install
+COPY server ./server
+COPY logs.txt ./logs.txt
+EXPOSE 8000
+
+ENV FRONT_URL=http://localhost:5000
+CMD ["npm", "start"]

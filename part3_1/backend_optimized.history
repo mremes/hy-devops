@@ -1,0 +1,15 @@
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+4a8ecf65a028        9 minutes ago       /bin/sh -c #(nop)  CMD ["npm" "start"]          0B                  
+c18f8e8021b6        9 minutes ago       /bin/sh -c #(nop)  ENV FRONT_URL=http://loca…   0B                  
+a3f9c85ffb52        9 minutes ago       /bin/sh -c #(nop)  EXPOSE 8000                  0B                  
+e1899bbe91f8        9 minutes ago       /bin/sh -c #(nop) COPY file:145e30033f41c4f3…   1.61kB              
+18138064e02c        9 minutes ago       /bin/sh -c #(nop) COPY dir:087fc6c33e3dc0827…   3.37kB              
+7bb453e3f455        9 minutes ago       /bin/sh -c npm install                          68.6MB              
+cbf31ba16552        10 minutes ago      /bin/sh -c #(nop) COPY multi:cb3fe8677d457e9…   1.77kB              
+0a6f84cc50c8        10 minutes ago      /bin/sh -c apt update && apt install -f -y c…   141MB               
+dec832f436bb        2 weeks ago         /bin/sh -c #(nop) WORKDIR /webapp               0B                  
+a51debf7e1eb        6 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B                  
+<missing>           6 weeks ago         /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B                  
+<missing>           6 weeks ago         /bin/sh -c rm -rf /var/lib/apt/lists/*          0B                  
+<missing>           6 weeks ago         /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B                
+<missing>           6 weeks ago         /bin/sh -c #(nop) ADD file:efec03b785a78c01a…   116MB               
